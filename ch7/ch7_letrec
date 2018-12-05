@@ -1,0 +1,38 @@
+#lang sicp
+
+; chapter 7 exercise 4
+; 使用 letrec
+
+(define my-reverse
+  (lambda (ls)
+    (letrec ((loop (lambda (ls0 ls1)
+                     (if (null? ls0)
+                         ls1
+                         (loop (cdr ls0) (cons (car ls0) ls1))))))
+      (loop ls `()))))
+
+(my-reverse `(1 2 3))
+
+(define my-sum-tail
+  (lambda (ls)
+    (letrec ((loop
+              (lambda (ls0 n)
+                (if (null? ls0)
+                    n
+                    (loop (cdr ls0) (+ (car ls0) n))))))
+      (loop ls 0))))
+
+(my-sum-tail `(1 2 3 4))
+
+(define my-string->integer
+  (lambda (str)
+    (letrec ((loop
+              (lambda (ls n)
+                (if (null? ls)
+                    n
+                    (loop (cdr ls)
+                          (+ (* n 10)
+                             (- (char->integer (car ls)) 48)))))))
+      (loop (string->list str) 0))))
+
+(my-string->integer "123456")

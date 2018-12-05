@@ -1,0 +1,14 @@
+#lang sicp
+
+(define my-sum-tail
+  (lambda (ls)
+    (my-sum-rec ls 0)))
+
+(define my-sum-rec
+  (lambda (ls sum)
+    (if (null? ls)
+        sum
+        (my-sum-rec (cdr ls) (+ (car ls) sum)))))
+
+(my-sum-tail `(1 2 3 4))
+    

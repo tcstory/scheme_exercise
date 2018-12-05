@@ -1,0 +1,18 @@
+#lang sicp
+
+(define my-string->integer
+  (lambda (str)
+    (char2int (string->list str) 0)))
+
+; 教程里, 这个函数把字符转成数字的思路我还真没有想到
+(define char2int
+  (lambda (ls n)
+    (if (null? ls)
+        n
+        (char2int (cdr ls)
+                  (+
+                   (- (char->integer (car ls)) 48)
+                   (* n 10))))))
+
+(my-string->integer "123456")
+    

@@ -1,0 +1,21 @@
+#lang sicp
+
+; 版本1
+;(define position
+;  (lambda (ls x n)
+;    (if (null? ls)
+;        #f
+;        (let ((h (car ls)))
+;          (if (eqv? h x)
+;              n
+;              ((lambda (y) y) (position (cdr ls) x (+ n 1))))))))
+
+; 版本2
+;(define position
+;  (lambda (ls x i)
+;    (cond
+;      ((null? ls) #f)
+;      ((eqv? (car ls) x) i)
+;      (else (position (cdr ls) x (+ i 1))))))
+
+(position `(1 2 3 3) 2 0)

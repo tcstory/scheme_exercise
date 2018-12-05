@@ -1,0 +1,15 @@
+#lang sicp
+
+(define remove
+  (lambda (ls x)
+    (display ls)
+    (display "\n")
+    (if (null? ls)
+        `()
+        (let ((h (car ls)))
+          ((if (eqv? h x)
+              (lambda (y) y)
+              (lambda (y) (cons h y))) (remove (cdr ls) x))))))
+
+
+(remove `(1 2 3) 3)

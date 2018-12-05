@@ -1,0 +1,42 @@
+#lang sicp
+
+; 使用 set-cdr! 和 set-car! 实现的队列, 大量使用了 lambda 而不是 let 这样的语法糖
+
+(define make-queue
+  (lambda ()
+    (cons `() `())))
+
+(define enqueue!
+  (lambda (queue obj)
+    (if (null? (car queue))
+        ((lambda (m)
+           (set-car! queue m)
+           (set-cdr! queue m)) (cons obj `()))
+        ((lambda (m)
+           (set-cdr! (cdr queue) m)
+           (set-cdr! queue m)) (cons obj `())))
+    (car queue)))
+
+(define dequeue!
+  (lambda (queue)
+    ((lambda (obj)
+       (if (null? obj)
+           (begin
+             (set-cdr! queue `())
+             `())
+           (begin
+             (set-car! queue (cdr (car queue)))
+             (car obj)))) (car queue))))
+
+(define q (make-queue))
+(enqueue! q 'a)
+q
+(enqueue! q 'b)
+q
+(enqueue! q 'c)
+q
+(dequeue! q)
+(dequeue! q)
+(dequeue! q)
+(dequeue! q)
+q

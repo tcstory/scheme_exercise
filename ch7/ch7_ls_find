@@ -1,0 +1,25 @@
+#lang sicp
+
+; 数组的 find 方法
+
+(define find
+  (lambda (ls x)
+    (if (null? ls)
+        #f
+        (let ((h (car ls)))
+          (if (eqv? h x)
+              #t
+              ((lambda (y) y) (find (cdr ls) x)))))))
+
+
+; 版本2, 简化版
+
+(define find1
+  (lambda (ls x)
+    (cond
+      ((null? ls) #f)
+      ((eqv? (car ls) x) #t)
+      (else (find1 (cdr ls) x)))))
+                           
+
+(find1 `(1 2 3) 33)
